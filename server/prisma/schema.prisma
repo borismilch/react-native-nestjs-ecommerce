@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @default(autoincrement()) @id
+  email String  @unique
+  name  String?
+  password String
+  picture String
+  products Product[]
+  comments Comment[]
+  orders Order[]
+  bio String?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Product {
+  id Int @default(autoincrement()) @id
+  title String
+  image String 
+  images String[]
+  description String
+  options String[]
+  avgRating Float 
+  price Int 
+  oldPrice Int 
+  userId Int
+
+  shippings Shipping[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  likes Like[]
+  
+  owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments Comment[]
+
+  @@map("products")
+}
+
+model Comment {
+  id Int @default(autoincrement()) @id
+  userId Int
+  productId  Int
+  body String 
+  timeStamp DateTime @default(now()) 
+  updatedAt DateTime @updatedAt
+  
+  rait Int
+
+  owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("comments")
+}
+
+model Order {
+  id Int @default(autoincrement()) @id
+  totalCost Int
+  userId Int
+  timeStamp DateTime @default(now()) 
+  shippings Shipping[]
+  owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("orders")
+}
+
+model Shipping {
+  id Int @default(autoincrement()) @id
+  productId Int
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  orderId Int
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  count Int
+}
+
+model Like {
+  id Int @default(autoincrement()) @id
+  userId Int 
+  productId Int
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+

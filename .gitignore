@@ -1,0 +1,8 @@
+server/node_modules
+client/node_modules
+client/.expo 
+client/.expo-shared 
+server/dist 
+server/.expo 
+server/.env 
+server/mylastproject-91894-firebase-adminsdk-ak61m-ba36f268fe

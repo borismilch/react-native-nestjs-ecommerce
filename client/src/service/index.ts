@@ -1,0 +1,9 @@
+export { default as AuthService } from "./auth.service";
+export { default as FileService } from "./file.service";
+export { default as Base64service } from "./base64.service";
+export { default as UserService } from "./user.service";
+export { default as ProductService } from "./product.service";
+export { default as CommentService } from "./comment.service";
+export { default as PaymentService } from "./payment.service";
+export { default as OrderService } from "./order.service";
+export { default as LikeService } from "./like.service";

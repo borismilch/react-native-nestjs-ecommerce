@@ -1,0 +1,1 @@
+export { queryNames } from "./queryNames";
