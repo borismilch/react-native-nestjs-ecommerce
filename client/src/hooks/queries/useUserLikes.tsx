@@ -10,7 +10,7 @@ const useProductLikes = () => {
   const { data, isLoading, isFetching } = useQuery(
     queryNames.userLikes,
     async () => {
-      return LikeService.getUsersLikes(user!.id);
+      return LikeService.getUsersLikes(user?.id || 1);
     }
   );
   return { likes: data?.data || [], isLoading: isLoading || isFetching };

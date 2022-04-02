@@ -15,11 +15,11 @@ const LikesSection: React.FC<LikesSectionProps> = (props) => {
 
   const { user } = useAuthStore();
   const liked = data?.data.find(
-    (item) => item.productId === productId && item.userId === user!.id
+    (item) => (item.productId === productId && item.userId === user?.id) || 1
   );
 
   useEffect(() => {
-    console.log(liked, productId, user!.id);
+    console.log(liked, productId, user?.id || 1);
   }, [liked]);
 
   const onLikeStateChange = () => (e: any) => {

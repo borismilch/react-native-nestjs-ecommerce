@@ -43,7 +43,16 @@ export class LikeService {
 				userId,
 			},
 			include: {
-				product: true,
+				product: {
+					include: {
+						comments: true,
+						_count: {
+							select: {
+								comments: true,
+							},
+						},
+					},
+				},
 			},
 		});
 	}

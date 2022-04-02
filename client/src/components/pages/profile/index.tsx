@@ -10,7 +10,7 @@ export const ProfileContent = () => {
     params: { userId },
   } = useRoute<RouteProp<{ params: { userId: number } }>>();
   const { user } = useAuthStore();
-  const isCurrentUser = user!.id === userId;
+  const isCurrentUser = user?.id || 1 === userId;
   const { isLoading, statsUser } = useUserStats(userId);
 
   return (

@@ -4,6 +4,10 @@ import { CommentPayload } from "models";
 import { useAppSelector } from "hooks/redux";
 import { updatingCommentSelector } from "store/selectors/update-comment.selector";
 import { useState, useEffect } from "react";
+import { useAppDispatch } from "hooks/redux";
+import { UpdateCommentActions } from "store/actions";
+import { useRef } from "react";
+import { TextInput } from "react-native-gesture-handler";
 
 const useCommentForm = (productId: number) => {
   const { addCommentMutation, updateCommentMutation } =
@@ -12,9 +16,13 @@ const useCommentForm = (productId: number) => {
   const { value, changeValue, cleanValue } = useInputValue("");
   const [rait, setRait] = useState<number>(1);
 
+  const inputRef = useRef<TextInput>(null);
+
   const onRaitChange = (num: number) => {
     setRait(num);
   };
+
+  const dispatch = useAppDispatch();
 
   const { isUpdating, updatingComment } = useAppSelector(
     updatingCommentSelector
@@ -22,6 +30,7 @@ const useCommentForm = (productId: number) => {
 
   useEffect(() => {
     changeValue(updatingComment?.body || "");
+    inputRef.current?.focus();
   }, [updatingComment]);
 
   const onCreateComment = () => {
@@ -32,7 +41,7 @@ const useCommentForm = (productId: number) => {
     const commentPayload: CommentPayload = {
       body: value,
       productId,
-      userId: user!.id,
+      userId: user?.id || 1,
       rait,
     };
 
@@ -41,6 +50,7 @@ const useCommentForm = (productId: number) => {
 
     if (isUpdating) {
       updateCommentMutation.mutate([commentPayload, updatingComment!.id]);
+      dispatch(UpdateCommentActions.endUpdatingComent());
     } else addCommentMutation.mutate(commentPayload);
   };
   return {
@@ -50,6 +60,7 @@ const useCommentForm = (productId: number) => {
     value,
     changeValue,
     cleanValue,
+    inputRef,
   };
 };
 

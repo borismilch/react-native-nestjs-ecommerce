@@ -8,9 +8,11 @@ import { store } from "store/store";
 import { Provider } from "react-redux";
 import { StripeProvider } from "@stripe/stripe-react-native";
 import { config } from "config";
+import { LogBox } from "react-native";
+
+LogBox.ignoreAllLogs();
 
 console.warn = function warn() {};
-
 const client = new QueryClient();
 
 export default function App() {

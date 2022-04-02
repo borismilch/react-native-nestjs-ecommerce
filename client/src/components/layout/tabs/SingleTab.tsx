@@ -16,7 +16,7 @@ const SingleTab: React.FC<SingleTapProps> = (props) => {
   const isActive = route.name === tab.to;
 
   return (
-    <TouchableOpacity onPress={navigateTo(tab.to, { userId: user!.id })}>
+    <TouchableOpacity onPress={navigateTo(tab.to, { userId: user?.id || 1 })}>
       <View style={styles.wrapper(isActive)}>
         {isActive && <View style={style.badge} />}
 

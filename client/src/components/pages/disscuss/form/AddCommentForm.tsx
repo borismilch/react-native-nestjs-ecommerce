@@ -13,8 +13,15 @@ interface AddCommentFormProps {
 const AddCommentForm: React.FC<AddCommentFormProps> = (props) => {
   const { productId } = props;
 
-  const { onCreateComment, onRaitChange, rait, changeValue, value } =
-    useCommentForm(productId);
+  const {
+    onCreateComment,
+    onRaitChange,
+    rait,
+    changeValue,
+    value,
+    inputRef,
+    cleanValue,
+  } = useCommentForm(productId);
 
   return (
     <>
@@ -24,6 +31,7 @@ const AddCommentForm: React.FC<AddCommentFormProps> = (props) => {
 
       <View style={styles.wrapper}>
         <TextInput
+          ref={inputRef}
           value={value}
           onChangeText={changeValue}
           placeholder="Enter comment..."

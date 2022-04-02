@@ -24,7 +24,7 @@ const Comment: React.FC<CommentProps> = (props) => {
   const { updatingComment } = useAppSelector(updatingCommentSelector);
   const { navigateTo } = useRouting();
 
-  const isOwner = user!.id === comment.owner.id;
+  const isOwner = user?.id === comment.owner.id;
   const isUpdating = comment.owner.id === updatingComment?.id;
 
   const updateCurrentComment = () => {

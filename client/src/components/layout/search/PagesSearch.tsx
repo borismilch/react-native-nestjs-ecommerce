@@ -25,7 +25,7 @@ const PagesSearch = () => {
     inputRef.current?.focus();
   };
 
-  const nativeRoutes = ["home", "cart", "profile", "search"];
+  const nativeRoutes = ["home", "cart", "liked", "detail"];
   const isHomeScreen = nativeRoutes.includes(route.name);
 
   return (
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
       justifyContent: "center",
       backgroundColor: "white",
       borderRadius: 10,
-      maxWidth: windowWidth - (!isHomeScreen ? 65 : 0),
+      maxWidth: windowWidth - (isHomeScreen ? 65 : 0),
       fontSize: 19,
       padding: 9,
     };

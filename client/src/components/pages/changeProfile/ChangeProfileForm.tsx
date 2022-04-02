@@ -13,6 +13,7 @@ import { useMutation } from "react-query";
 import { UserService } from "service";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { useQueryClient } from "react-query";
+import { queryNames } from "constants/.";
 
 const isErrorStyle = (isError: boolean) =>
   isError ? { borderColor: "#ef4444", color: "#ef4444" } : {};
@@ -29,6 +30,7 @@ const ChangeProfileForm = () => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("user");
+        queryClient.invalidateQueries(queryNames.userStats);
         navigateTo("profile")();
       },
       onError: (e: Error) => {

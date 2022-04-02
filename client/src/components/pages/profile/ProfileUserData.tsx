@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { useAuthStore } from "hooks";
 import { Avatar } from "react-native-elements";
 import { Dimensions } from "react-native";
 
@@ -15,13 +14,15 @@ const ProfileContent: React.FC<ProfileContentProps> = (props) => {
 
   return (
     <View style={styles.wrapper}>
-      <Avatar
-        rounded
-        title="dksdsl"
-        avatarStyle={styles.avatar}
-        source={{ uri: picture }}
-        size={100}
-      />
+      {picture && (
+        <Avatar
+          rounded
+          title="dksdsl"
+          avatarStyle={styles.avatar}
+          source={{ uri: picture }}
+          size={100}
+        />
+      )}
 
       <View style={styles.textWrapper}>
         <Text style={styles.username}>{name}</Text>

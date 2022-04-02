@@ -13,7 +13,7 @@ const useLikeMutations = (productId: number) => {
       return await LikeService.likeProduct(
         {
           productId: data[0],
-          userId: user!.id,
+          userId: user?.id || 1,
         },
         data[1],
         data[2]

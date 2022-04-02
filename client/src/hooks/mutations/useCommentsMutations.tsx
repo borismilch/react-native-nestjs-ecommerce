@@ -11,6 +11,8 @@ const useCommentsMutations = (productId: number) => {
     console.log("valid");
     queryClient.invalidateQueries(queryNames.comments + productId);
     queryClient.invalidateQueries("currentProduct" + productId);
+    queryClient.invalidateQueries("currentProduct");
+    queryClient.invalidateQueries("products");
   };
 
   const addCommentMutation = useMutation(
